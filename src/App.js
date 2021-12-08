@@ -13,11 +13,10 @@ import InitialPage from './components/content/InitialPage';
 class App extends Component {
   render() {
     return (
-      <Router> 
         <div className="App">
           <Header />
           <Switch>
-            <Route path="/"><InitialPage /></Route>
+            <Route path="/" component={InitialPage}/>
             <Route
               exact path="/watch/:videoId"
               render={(props) => <VideoPage {...props} />}
@@ -26,10 +25,9 @@ class App extends Component {
               exact path="/results/:searchParam"
               render={(props) => <SearchResult {...props} />}
             />
-            <Route path="*"><NotFound /></Route>
+            <Route path="*" component={NotFound}/>
           </Switch>
         </div>
-      </Router>
     );
   }
 };
