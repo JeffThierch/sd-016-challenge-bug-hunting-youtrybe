@@ -1,5 +1,5 @@
 let YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3';
-const YOUTUBE_AUTH_KEY = 'ADD_YOUR_KEY';
+const YOUTUBE_AUTH_KEY = 'AIzaSyAUVmh-OTH3LRCxpsq6rPRuI5zkYTEDKKI';
 
 export const searchVideos = (searchText) => {
   const URL = `${YOUTUBE_API_URL}/search?part=snippet&q=${searchText}&maxResults=25&key=${YOUTUBE_AUTH_KEY}`;
@@ -7,6 +7,7 @@ export const searchVideos = (searchText) => {
   return new Promise((resolve, reject) => {
     resolve(
       fetch(URL)
+        .then((response) => response.json())
         .then((data) => data)
         .catch(error => reject(error))
     );
