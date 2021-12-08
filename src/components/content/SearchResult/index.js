@@ -27,6 +27,7 @@ class SearchResult extends Component {
 
   render() {
     const { data } = this.state;
+    console.log(this.props);
 
     if (data.length < 1) return (<div>Loading...</div>)
 
