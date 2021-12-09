@@ -1,12 +1,13 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { createMemoryHistory, History } from 'history';
 import VideoPage from '../components/content/VideoPage/VideoPage';
 import mockSearchVideo from '../__mocks__/mockSearchVideo';
 import mockGetVideoInfo from '../__mocks__/mockGetVideoInfo';
 import mockGetVideoComments from '../__mocks__/mockGetVideoComments';
 import * as api from '../api/service'
+import { Route } from 'react-router-dom';
 
 jest.mock('react-router-dom', () => {
   const moduloOriginal = jest.requireActual('react-router-dom');
@@ -28,8 +29,8 @@ api.getVideoComments.mockImplementation(
 );
 
 function renderWithRouter(ui, routeConfigs = {}) {
-  const route = routeConfigs.route || '/';
-  const history = routeConfigs.history || createMemoryHistory({ initialEntries: [route] });
+  const route = routeConfigs[`route`] || '/';
+  const history = routeConfigs['history'] || createMemoryHistory({ initialEntries: [route] });
   return {
     ...render(<Router history={history}>{ui}</Router>),
     history,
@@ -63,9 +64,13 @@ describe('Funcionalidades Componente Video Page', () => {
       <VideoPage
         match={{ params: { videoId: randomVideoID } }}
         location={{ state: { data: mockSearchVideo.items } }}
+        history={createMemoryHistory()}
       />,
       { route: `/watch/${randomVideoID}` }
     );
+
+
+    console.log(history.location);
 
     await waitFor(() => expect(api.getVideoInfo).toHaveBeenCalled());
     await waitFor(() => expect(api.getVideoComments).toHaveBeenCalled());
@@ -74,7 +79,7 @@ describe('Funcionalidades Componente Video Page', () => {
     fireEvent.click(screen.getAllByTestId('selectedVideo')[2]);
     await waitFor(() => expect(api.getVideoInfo).toHaveBeenCalled());
     await waitFor(() => expect(api.getVideoComments).toHaveBeenCalled());
-
-    expect(history.location.pathname).not.toEqual(`/watch/${randomVideoID}`)
+    console.log(history.location);
+    expect(history.location.pathname).not.toEqual(`/watch/${randomVideoID}`) 
   })
 })

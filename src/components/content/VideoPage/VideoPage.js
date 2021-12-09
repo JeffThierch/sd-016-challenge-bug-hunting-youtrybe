@@ -26,26 +26,30 @@ class VideoPage extends Component {
 
     getVideoComments(this.state.videoId)
       .then((data) => this.setState({ videoComments: data.items }));
+    
   }
 
   handleSelectedVideo(videoId) {
-    this.setState({ videoId: videoId })
-    getVideoInfo(this.state.videoId)
-      .then((data) => this.setState({ videoInfo: data.items[0] }));
-
-    getVideoComments(this.state.videoId)
-      .then((data) => this.setState({ videoComments: data.items }));
-    this.props.history.push(`/watch/${videoId}`);
+    this.setState({ videoId: videoId }, () => {
+      getVideoInfo(videoId)
+        .then((data) => this.setState({ videoInfo: data.items[0] }));
+  
+      getVideoComments(videoId)
+        .then((data) => this.setState({ videoComments: data.items }));
+      
+      this.props.history.push(`/watch/${videoId}`);
+    })
   }
 
   render() {
-    if (!this.state.videoInfo || !this.state.videoComments)
+    console.log(this.state);
+    if (!this.state.videoInfo)
       return <main></main>;
 
     return (
       <main>
-        <section className="player">
-          <VideoPlayer embedId={this.state.videoId} />
+        <section className="player" >
+          <VideoPlayer embedId={this.state.videoId} videoName={this.state.videoInfo.snippet.title} />
           <VideoPlayerInfo
             statisticsInfo={this.state.videoInfo.statistics}
             title={this.state.videoInfo.snippet.title}
@@ -55,13 +59,14 @@ class VideoPage extends Component {
             description={this.state.videoInfo.snippet.description}
             publishedAt={this.state.videoInfo.snippet.publishedAt}
           />
-          <VideoPlayerComments
+          {this.state.videoComments ?  (<VideoPlayerComments
             statisticsInfo={this.state.videoInfo.statistics}
             videoComments={this.state.videoComments}
-          />
+          />) : 'Os comentarios estao desativados'}
+         
         </section>
         <section className="sidebar">
-          <VideoSideBar relatedVideos={this.state.relatedVideos} handleSelectedVideo={this.handleSelectedVideo} />
+          <VideoSideBar relatedVideos={this.state.relatedVideos} handleSelectedVideo={this.handleSelectedVideo}/>
         </section>
       </main>
     );
