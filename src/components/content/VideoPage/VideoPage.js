@@ -42,7 +42,6 @@ class VideoPage extends Component {
   }
 
   render() {
-    console.log(this.state);
     if (!this.state.videoInfo)
       return <main></main>;
 
