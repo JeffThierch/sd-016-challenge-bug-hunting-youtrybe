@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 class VideoPlayerUsersComments extends Component {
 
-  formatDate(publishedAt) { // colocar o bug aqui de data nao formatada
+  formatDate(publishedAt) { 
     const dateObj = new Date(publishedAt)
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -18,7 +18,6 @@ class VideoPlayerUsersComments extends Component {
   render() {
 
     const { videoComments,  } = this.props;
-    // authorProfileImageUrl
     return (
       <Fragment>
         {
@@ -40,17 +39,17 @@ class VideoPlayerUsersComments extends Component {
                 </h3>
                 <p>{comment.snippet.topLevelComment.snippet.textDisplay}</p>
                 <div>
-                  <a className="thumb-up-btn">
+                  <button className="thumb-up-btn">
                     <i className="material-icons">thumb_up</i>
                     <span className="thumbs-count">
                       {comment.snippet.topLevelComment.snippet.likeCount}
                     </span>
-                  </a>
-                  <a className="thumb-up-btn">
+                  </button>
+                  <button className="thumb-up-btn">
                     <i className="material-icons">thumb_down</i>
                     <span className="thumbs-count"></span>
-                  </a>
-                  <a>REPLY</a>
+                  </button>
+                  <button>REPLY</button>
                 </div>
               </div>
             </div>
