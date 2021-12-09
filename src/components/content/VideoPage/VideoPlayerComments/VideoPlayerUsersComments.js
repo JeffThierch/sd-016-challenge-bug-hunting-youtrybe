@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import profileIcon from './../../../../assets/profile.jpg'
 
 class VideoPlayerUsersComments extends Component {
 
@@ -18,7 +17,7 @@ class VideoPlayerUsersComments extends Component {
   }
   render() {
 
-    const { videoComments } = this.props;
+    const { videoComments,  } = this.props;
     // authorProfileImageUrl
     return (
       <Fragment>
@@ -26,7 +25,12 @@ class VideoPlayerUsersComments extends Component {
           videoComments.map((comment) => (
             <div className="comment" key={comment.id}>
               <div className="comment-avatar">
-                <i className="material-icons account-icon">account_circle</i>
+                <i className="material-icons account-icon">
+                  <img 
+                  src={comment.snippet.topLevelComment.snippet.authorProfileImageUrl} 
+                  alt={comment.snippet.topLevelComment.snippet.authorDisplayName} />
+                </i>
+                
               </div>
               <div className="comment-info">
                 <h3>{comment.snippet.topLevelComment.snippet.authorDisplayName}
