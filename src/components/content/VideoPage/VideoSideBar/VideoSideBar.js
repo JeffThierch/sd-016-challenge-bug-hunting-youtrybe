@@ -9,11 +9,12 @@ class VideoSideBar extends Component {
     const { relatedVideos, handleSelectedVideo } = this.props;
     return (
       <Fragment>
-        {relatedVideos.map((video) => (
-          <Fragment key={video.id.videoId} >
+        {relatedVideos.map((video, index) => (
             <div
+              key={index}
               className="suggested-video"
               onClick={() => handleSelectedVideo(video.id.videoId)}
+              data-testid="selectedVideo"
             >
               <VideoThumbNail
                 videoId={video.id.videoId}
@@ -24,7 +25,6 @@ class VideoSideBar extends Component {
                 channel={video.snippet.channelTitle}
               />
             </div>
-          </Fragment>
         ))}
       </Fragment>
     );

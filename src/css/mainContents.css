@@ -20,6 +20,7 @@ main {
 }
 
 .sidebar {
+
   /* background-color: #3634b1; */
   width: 31%;
 }
@@ -40,13 +41,12 @@ main {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  width: 40%;
+  width: 45%;
 }
 
-.right-menu .material-icons,
-.right-menu span {
+.right-menu .material-icons, .right-menu span {
   color: #888;
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
 .right-menu .share-btn .material-icons {
@@ -54,18 +54,18 @@ main {
 }
 
 .right-menu a span {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-left: 0.6rem;
 }
 
-.thumb-wrapper,
-.share-btn,
-.save-btn,
-.options-btn {
+.thumb-wrapper, .share-btn, .save-btn, .options-btn {
   align-items: center;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
   display: flex;
   justify-content: center;
+  margin-right: 1rem;
 }
 
 .thumb-wrapper {
@@ -73,12 +73,13 @@ main {
   padding: 1.3rem 0;
 }
 
-.thumb-up-btn,
-.thumb-down-btn {
+.thumb-up-btn, .thumb-down-btn {
   align-items: center;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
   display: flex;
   justify-content: space-between;
-  margin-right: 1.4rem;
+  margin-right: 1.5rem;
 }
 
 .thumb-down-btn {
